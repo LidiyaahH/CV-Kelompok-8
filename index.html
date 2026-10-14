@@ -1,0 +1,907 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CV Studio | Personal Profiles</title>
+
+<style>
+:root {
+  --cream: #f7f2eb;
+  --paper: #fffdf9;
+  --beige: #eadbcb;
+  --brown: #795c4b;
+  --ink: #302a26;
+  --muted: #786f68;
+  --line: #e8dfd6;
+  --accent: #a8795d;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font: 16px/1.65 Arial, Helvetica, sans-serif;
+  transition: background .3s, color .3s;
+}
+
+.container {
+  width: min(1080px, calc(100% - 32px));
+  margin: auto;
+}
+
+header {
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  padding: 20px 0;
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font: bold 1.5rem Georgia, serif;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.brand span { color: var(--accent); }
+
+nav {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: .9rem;
+}
+
+nav a:hover { color: var(--accent); }
+
+button {
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  padding: 10px 15px;
+  background: var(--paper);
+  color: var(--brown);
+  font: inherit;
+  font-size: .85rem;
+  cursor: pointer;
+  transition: .2s;
+}
+
+button:hover {
+  background: var(--brown);
+  color: white;
+  transform: translateY(-1px);
+}
+
+.hero { padding: 64px 0 32px; }
+
+.eyebrow {
+  color: var(--accent);
+  font-size: .75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+h1, h2, h3 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.hero h1 {
+  font-size: clamp(2.4rem, 6vw, 4.5rem);
+  max-width: 780px;
+  margin: 12px 0;
+}
+
+.hero p, .intro {
+  color: var(--muted);
+  max-width: 680px;
+}
+
+.profiles { padding: 20px 0 60px; }
+
+.section-title {
+  font-size: 2.3rem;
+  margin-bottom: 0;
+}
+
+.intro { margin: 8px 0 25px; }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px #39291a08;
+  min-width: 0;
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  color: #b5a596;
+  font-family: Georgia, serif;
+}
+
+.card-photo {
+  width: 78px;
+  height: 78px;
+  min-width: 78px;
+  max-width: 78px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 4px 14px #0002;
+}
+
+.card h3 {
+  font-size: 1.5rem;
+  margin: 18px 0 6px;
+  overflow-wrap: anywhere;
+}
+
+.card p {
+  color: var(--muted);
+  font-size: .93rem;
+  margin: 0 0 18px;
+}
+
+.tags, .skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 20px;
+}
+
+.tag, .skill {
+  font-size: .78rem;
+  padding: 5px 10px;
+  background: #f2e8de;
+  color: #775b49;
+  border-radius: 99px;
+}
+
+.link {
+  background: var(--ink);
+  color: white;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 99px;
+  font-size: .9rem;
+  display: inline-block;
+}
+
+.link:hover { background: var(--accent); }
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: auto;
+}
+
+.card-actions .link { margin-top: 0; }
+
+.detail-button, .print-button, .theme-button {
+  margin-top: 0;
+}
+
+.cv-section {
+  padding: 10px 0 35px;
+  scroll-margin-top: 18px;
+}
+
+.cv {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 25px;
+  box-shadow: 0 12px 35px #39291a08;
+}
+
+.banner {
+  background: linear-gradient(115deg, #e8d8c7, #f8f0e8);
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+}
+
+.banner-copy { flex: 1; min-width: 0; }
+
+.banner h2 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin: 8px 0;
+  overflow-wrap: anywhere;
+}
+
+.subtitle { margin: 0; color: #6d5b4f; }
+
+.cv-photo {
+  display: block;
+  width: 142px;
+  height: 174px;
+  min-width: 142px;
+  max-width: 142px;
+  min-height: 174px;
+  max-height: 174px;
+  object-fit: cover;
+  object-position: center top;
+  border: 4px solid #ffffffdf;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px #0002;
+  flex-shrink: 0;
+}
+
+.contacts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 20px;
+  padding: 20px 30px;
+  background: #fffaf4;
+  border-bottom: 1px solid var(--line);
+  font-size: .9rem;
+  overflow-wrap: anywhere;
+}
+
+.contacts strong { color: var(--brown); }
+.contacts a { color: inherit; text-decoration: none; }
+
+.content {
+  padding: 28px 30px 34px;
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 32px;
+}
+
+.column { min-width: 0; }
+
+.block + .block { margin-top: 26px; }
+
+.block h3 {
+  font-size: 1.35rem;
+  margin: 0 0 13px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--line);
+}
+
+.block p {
+  margin: 0;
+  color: #5f5852;
+  font-size: .94rem;
+}
+
+.entry { margin-bottom: 18px; }
+.entry:last-child { margin-bottom: 0; }
+
+.entry-title {
+  font-weight: bold !important;
+  color: var(--ink) !important;
+}
+
+.meta {
+  color: var(--accent) !important;
+  font-size: .83rem !important;
+  margin: 3px 0 6px !important;
+}
+
+.entry ul {
+  padding-left: 19px;
+  margin: 7px 0 0;
+  color: #5f5852;
+  font-size: .92rem;
+}
+
+.entry li { margin-bottom: 4px; }
+
+.skill {
+  background: #fffaf5;
+  border: 1px solid #e5d8ca;
+  border-radius: 8px;
+}
+
+.footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 25px 0 40px;
+  font-size: .85rem;
+}
+
+[hidden] { display: none !important; }
+
+/* TEMA GELAP */
+body.dark-mode {
+  --cream: #211f1d;
+  --paper: #2c2926;
+  --beige: #494039;
+  --brown: #e0c0a8;
+  --ink: #f5eee7;
+  --muted: #c7bdb4;
+  --line: #49413a;
+  --accent: #d5a789;
+}
+
+body.dark-mode .brand { color: var(--ink); }
+
+body.dark-mode .banner {
+  background: linear-gradient(115deg, #42372f, #332d28);
+}
+
+body.dark-mode .subtitle,
+body.dark-mode .block p,
+body.dark-mode .entry ul,
+body.dark-mode .card p {
+  color: #d8cec5;
+}
+
+body.dark-mode .contacts { background: #272421; }
+
+body.dark-mode .tag {
+  background: #40362f;
+  color: #f0d7c3;
+}
+
+body.dark-mode .skill {
+  background: #302b27;
+  color: #f0d7c3;
+  border-color: #51463d;
+}
+
+body.dark-mode .link {
+  background: #e0c0a8;
+  color: #29231f;
+}
+
+body.dark-mode .link:hover { background: #d5a789; }
+
+body.dark-mode button {
+  background: #39332e;
+  color: #f5eee7;
+  border-color: #51463d;
+}
+
+@media (max-width: 820px) {
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .content { grid-template-columns: 1fr; gap: 24px; }
+}
+
+@media (max-width: 580px) {
+  .container { width: calc(100% - 24px); }
+  .hero { padding: 42px 0 22px; }
+  .cards { grid-template-columns: 1fr; }
+  .banner {
+    padding: 20px 16px;
+    gap: 12px;
+    align-items: flex-start;
+  }
+  .banner h2 { font-size: clamp(1.5rem, 6vw, 2.1rem); }
+  .cv-photo {
+    width: 92px;
+    height: 118px;
+    min-width: 92px;
+    max-width: 92px;
+    min-height: 118px;
+    max-height: 118px;
+    border-radius: 10px;
+  }
+  .contacts { grid-template-columns: 1fr; padding: 17px 18px; }
+  .content { padding: 22px 18px 26px; }
+  nav { gap: 10px; }
+  .nav { align-items: flex-start; }
+  .theme-button { padding: 8px 11px; }
+  .card-actions { align-items: stretch; }
+}
+
+@media print {
+  header, .hero, .profiles, .footer,
+  .theme-button, .detail-button, .print-button {
+    display: none !important;
+  }
+  .cv-section { padding: 0; }
+  .cv { box-shadow: none; break-after: page; }
+  .cv-photo {
+    width: 112px;
+    height: 140px;
+    min-width: 112px;
+    max-width: 112px;
+  }
+  body { background: white; color: black; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="#home">CV<span>.</span>Studio</a>
+
+    <nav>
+      <a href="#home">Beranda</a>
+      <a href="#siti">Siti</a>
+      <a href="#syarifah">Syarifah</a>
+      <a href="#luthfiah">Luthfiah</a>
+    </nav>
+
+    <button id="themeButton" class="theme-button" type="button">
+      🌙 Tema Gelap
+    </button>
+  </div>
+</header>
+
+<main id="home">
+
+<section class="hero container">
+  <div class="eyebrow">Personal profile & curriculum vitae</div>
+  <h1>Kenali cerita, pengalaman, dan perjalanan kami.</h1>
+  <p>Website sederhana untuk menampilkan profil, pendidikan, pengalaman organisasi, dan keterampilan. Pilih profil untuk melihat CV lengkap.</p>
+</section>
+
+<section class="profiles container">
+  <h2 class="section-title">Our profiles</h2>
+  <p class="intro">Tiga profil mahasiswa dengan pengalaman dan minat yang berbeda.</p>
+
+  <div class="cards">
+
+    <article class="card">
+      <div class="card-top">
+        <span>01 / PROFILE</span>
+        <img class="card-photo" src="images_siti.jpg" alt="Foto Siti Maulidiyah">
+      </div>
+      <h3>Siti Maulidiyah</h3>
+      <p>Teliti, komunikatif, dan memiliki pengalaman dalam administrasi serta organisasi sekolah.</p>
+      <div class="tags">
+        <span class="tag">Administrasi</span>
+        <span class="tag">PMR</span>
+        <span class="tag">Teamwork</span>
+      </div>
+      <a class="link" href="#siti">Lihat CV ↗</a>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <span>02 / PROFILE</span>
+        <img class="card-photo" src="images_riri.jpeg" alt="Foto Syarifah Ni'mah">
+      </div>
+      <h3>Syarifah Ni'mah</h3>
+      <p>Mahasiswa Manajemen Pendidikan dengan pengalaman mengajar dan kegiatan organisasi.</p>
+      <div class="tags">
+        <span class="tag">Pendidikan</span>
+        <span class="tag">Mengajar</span>
+        <span class="tag">Organisasi</span>
+      </div>
+      <a class="link" href="#syarifah">Lihat CV ↗</a>
+    </article>
+
+    <article class="card">
+      <div class="card-top">
+        <span>03 / PROFILE</span>
+        <img class="card-photo" src="images_pia.jpeg" alt="Foto Luthfiah Widia Ramadhani">
+      </div>
+      <h3>Luthfiah Widia Ramadhani</h3>
+      <p>Aktif dalam organisasi, kepanitiaan, relawan, dan penulisan artikel ilmiah.</p>
+      <div class="tags">
+        <span class="tag">Komunikasi</span>
+        <span class="tag">Media Digital</span>
+        <span class="tag">Publikasi</span>
+      </div>
+      <a class="link" href="#luthfiah">Lihat CV ↗</a>
+    </article>
+
+  </div>
+</section>
+
+<section class="cv-section container" id="siti">
+<article class="cv">
+
+  <div class="banner">
+    <div class="banner-copy">
+      <div class="eyebrow">Curriculum vitae · 01</div>
+      <h2>Siti Maulidiyah</h2>
+      <p class="subtitle">Administrasi · Organisasi · Komunikasi</p>
+    </div>
+    <img class="cv-photo" src="images_siti.jpg" alt="Foto Siti Maulidiyah">
+  </div>
+
+  <div class="contacts">
+    <div><strong>Telepon:</strong> 089516304964</div>
+    <div><strong>Email:</strong> <a href="mailto:sitimaulidiyah0604@gmail.com">sitimaulidiyah0604@gmail.com</a></div>
+    <div><strong>LinkedIn:</strong> <a href="https://linkedin.com/in/siti-maulidiyah-96a09327a">linkedin.com/in/siti-maulidiyah-96a09327a</a></div>
+    <div><strong>Domisili:</strong> Jakarta Selatan</div>
+  </div>
+
+  <div class="content">
+    <div class="column">
+
+      <section class="block">
+        <h3>Profil</h3>
+        <p>Saya tertarik mencoba hal baru dan mengembangkan kemampuan diri. Memiliki kemampuan mengatur waktu dan keuangan, menggunakan Microsoft Word, memeriksa detail pekerjaan, serta berkomunikasi dan berpikir logis.</p>
+      </section>
+
+      <section class="block">
+        <h3>Pengalaman Organisasi</h3>
+
+        <div class="entry">
+          <p class="entry-title">Ketua PMR — MA Al Falah</p>
+          <p class="meta">Januari 2023 – 2024</p>
+          <ul>
+            <li>Mengoordinasikan anggota dan setiap divisi.</li>
+            <li>Menyusun program kerja serta melakukan evaluasi kegiatan.</li>
+            <li>Mengadakan bakti sosial, penggalangan dana, dan kegiatan donor darah.</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <p class="entry-title">Sekretaris PMR — MA Al Falah</p>
+          <p class="meta">Januari 2022 – 2023</p>
+          <ul>
+            <li>Mengelola absensi, surat-menyurat, proposal, dan laporan kegiatan.</li>
+            <li>Membantu pencatatan dana serta mendukung rapat evaluasi bulanan.</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <p class="entry-title">Anggota Perpustakaan OSIS — MA Al Falah</p>
+          <p class="meta">Februari 2022 – 2024</p>
+          <ul>
+            <li>Mengusulkan ide program perpustakaan dan membantu pendataan buku.</li>
+            <li>Mendukung kegiatan taman baca anak.</li>
+          </ul>
+        </div>
+      </section>
+    </div>
+
+    <div class="column">
+      <section class="block">
+        <h3>Pendidikan</h3>
+        <div class="entry">
+          <p class="entry-title">MAS Al Falah</p>
+          <p class="meta">2021 – 2024 · Ilmu Pengetahuan Sosial (IPS)</p>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3>Keterampilan</h3>
+        <div class="skills">
+          <span class="skill">Microsoft Word</span>
+          <span class="skill">Bahasa Indonesia</span>
+          <span class="skill">Kerja Tim</span>
+          <span class="skill">Manajemen Waktu</span>
+          <span class="skill">Penyusunan Proposal</span>
+          <span class="skill">Ketelitian</span>
+          <span class="skill">Cepat Belajar</span>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>
+</section>
+
+<section class="cv-section container" id="syarifah">
+<article class="cv">
+
+  <div class="banner">
+    <div class="banner-copy">
+      <div class="eyebrow">Curriculum vitae · 02</div>
+      <h2>Syarifah Ni'mah</h2>
+      <p class="subtitle">Manajemen Pendidikan · Pengajaran · Organisasi</p>
+    </div>
+    <img class="cv-photo" src="images_riri.jpeg" alt="Foto Syarifah Ni'mah">
+  </div>
+
+  <div class="contacts">
+    <div><strong>Telepon:</strong> 0858 1046 2904</div>
+    <div><strong>Email:</strong> <a href="mailto:syarifahriri24@gmail.com">syarifahriri24@gmail.com</a></div>
+    <div><strong>Domisili:</strong> Pancoran, Jakarta Selatan</div>
+    <div><strong>Tanggal lahir:</strong> 24 Agustus 2006 · Jakarta</div>
+  </div>
+
+  <div class="content">
+    <div class="column">
+      <section class="block">
+        <h3>Profil</h3>
+        <p>Mahasiswa S1 Manajemen Pendidikan yang memiliki pengalaman dalam organisasi, pengajaran, dan kegiatan kampus. Tertarik mengembangkan kemampuan komunikasi, kepemimpinan, serta kontribusi di bidang pendidikan.</p>
+      </section>
+
+      <section class="block">
+        <h3>Pengalaman</h3>
+
+        <div class="entry">
+          <p class="entry-title">Guru — Pondok Pesantren Nurussalam</p>
+          <p class="meta">Sawangan, Depok · 2024 – 2025</p>
+          <ul>
+            <li>Melaksanakan kegiatan mengajar selama satu tahun.</li>
+            <li>Mendukung kegiatan belajar dan pembinaan santri.</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <p class="entry-title">Pengurus OSIS — Divisi Pengajaran dan Ibadah</p>
+          <p class="meta">2022 – 2023</p>
+          <ul><li>Mendukung program pengajaran dan kegiatan ibadah.</li></ul>
+        </div>
+
+        <div class="entry">
+          <p class="entry-title">Pengurus Konsulat — Divisi Pengajaran dan Ibadah</p>
+          <p class="meta">2021 – 2022</p>
+          <ul><li>Membantu koordinasi kegiatan divisi.</li></ul>
+        </div>
+
+        <div class="entry">
+          <p class="entry-title">UKM HiQMa — UIN Jakarta</p>
+          <p class="meta">2025 – sekarang</p>
+          <ul><li>Aktif mengikuti kegiatan organisasi kampus.</li></ul>
+        </div>
+      </section>
+    </div>
+
+    <div class="column">
+      <section class="block">
+        <h3>Pendidikan</h3>
+        <div class="entry">
+          <p class="entry-title">UIN Syarif Hidayatullah Jakarta</p>
+          <p class="meta">2025 – sekarang · S1 Manajemen Pendidikan</p>
+        </div>
+        <div class="entry">
+          <p class="entry-title">MA Daarul Rahman Jakarta</p>
+          <p class="meta">2021 – 2024</p>
+        </div>
+        <div class="entry">
+          <p class="entry-title">MTs Daarul Rahman Jakarta</p>
+          <p class="meta">2018 – 2021</p>
+        </div>
+        <div class="entry">
+          <p class="entry-title">MI Nurul Hidayah</p>
+          <p class="meta">2012 – 2018</p>
+        </div>
+        <div class="entry">
+          <p class="entry-title">RA Miftahul Jannah</p>
+          <p class="meta">2011 – 2012</p>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3>Prestasi</h3>
+        <div class="entry">
+          <p class="entry-title">Juara 1 Kaligrafi antar kelas MI</p>
+          <p class="meta">2017</p>
+        </div>
+        <div class="entry">
+          <p class="entry-title">Juara 1 MTQ antar kelas Tsanawiyah/Aliyah</p>
+          <p class="meta">2021</p>
+        </div>
+        <div class="entry">
+          <p class="entry-title">Juara 2 Solo Sholawat tingkat remaja</p>
+          <p class="meta">2026</p>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3>Keterampilan</h3>
+        <div class="skills">
+          <span class="skill">Pengajaran</span>
+          <span class="skill">Komunikasi</span>
+          <span class="skill">Organisasi</span>
+          <span class="skill">Kerja Tim</span>
+          <span class="skill">Manajemen Waktu</span>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>
+</section>
+
+<section class="cv-section container" id="luthfiah">
+<article class="cv">
+
+  <div class="banner">
+    <div class="banner-copy">
+      <div class="eyebrow">Curriculum vitae · 03</div>
+      <h2>Luthfiah Widia Ramadhani</h2>
+      <p class="subtitle">Manajemen Pendidikan · Komunikasi · Media Digital</p>
+    </div>
+    <img class="cv-photo" src="images_pia.jpeg" alt="Foto Luthfiah Widia Ramadhani">
+  </div>
+
+  <div class="contacts">
+    <div><strong>Telepon:</strong> +6285732024191</div>
+    <div><strong>Email:</strong> <a href="mailto:luthfiahwidiaramadhani@gmail.com">luthfiahwidiaramadhani@gmail.com</a></div>
+    <div><strong>Domisili:</strong> Pekalongan</div>
+    <div><strong>Tanggal lahir:</strong> 12 Oktober 2006</div>
+  </div>
+
+  <div class="content">
+    <div class="column">
+      <section class="block">
+        <h3>Profil</h3>
+        <p>Mahasiswa Manajemen Pendidikan di UIN Syarif Hidayatullah Jakarta yang tertarik pada bidang pendidikan, organisasi, dan pengembangan diri. Memiliki pengalaman organisasi sekolah, kepanitiaan, kegiatan relawan, serta publikasi artikel ilmiah. Terbiasa bekerja sama dan membuat konten digital.</p>
+      </section>
+
+      <section class="block">
+        <h3>Pengalaman Organisasi</h3>
+
+        <div class="entry">
+          <p class="entry-title">Ketua Sekbid II Kominfo — OSIS MAS Khazanah Kebajikan</p>
+          <p class="meta">2023 – 2024</p>
+          <ul>
+            <li>Mengoordinasikan publikasi dan dokumentasi kegiatan sekolah.</li>
+            <li>Mendukung penyampaian informasi melalui media digital.</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <p class="entry-title">Sekretaris — OSIS MAS Khazanah Kebajikan</p>
+          <p class="meta">2022 – 2023</p>
+          <ul><li>Membantu administrasi dan koordinasi kegiatan OSIS.</li></ul>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3>Kepanitiaan & Relawan</h3>
+        <div class="entry">
+          <p class="entry-title">Panitia LDKS</p>
+          <p class="meta">2024</p>
+        </div>
+        <div class="entry">
+          <p class="entry-title">Volunteer Amgala</p>
+          <p class="meta">2025</p>
+        </div>
+      </section>
+    </div>
+
+    <div class="column">
+      <section class="block">
+        <h3>Pendidikan</h3>
+        <div class="entry">
+          <p class="entry-title">UIN Syarif Hidayatullah Jakarta</p>
+          <p class="meta">2025 – sekarang · S1 Manajemen Pendidikan</p>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3>Publikasi</h3>
+        <div class="entry">
+          <p class="entry-title">“Menelusuri Jejak Pancasila dalam Bangsa Indonesia”</p>
+          <p class="meta">2025 · Terbit di jurnal SINTA 6</p>
+        </div>
+      </section>
+
+      <section class="block">
+        <h3>Keterampilan</h3>
+        <div class="skills">
+          <span class="skill">Microsoft Word</span>
+          <span class="skill">Microsoft Excel</span>
+          <span class="skill">Canva</span>
+          <span class="skill">CapCut</span>
+          <span class="skill">Komunikasi</span>
+          <span class="skill">Kerja Tim</span>
+          <span class="skill">Manajemen Waktu</span>
+          <span class="skill">Adaptabilitas</span>
+          <span class="skill">Problem Solving</span>
+        </div>
+      </section>
+    </div>
+  </div>
+</article>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    © <span id="year"></span> CV.Studio · Personal profile website
+  </div>
+</footer>
+
+<script>
+// JavaScript terintegrasi langsung dalam HTML.
+document.addEventListener("DOMContentLoaded", function () {
+
+  // 1. Tahun otomatis pada footer.
+  const year = document.getElementById("year");
+  if (year) {
+    year.textContent = new Date().getFullYear();
+  }
+
+  // 2. Tombol ganti tema terang dan gelap.
+  const themeButton = document.getElementById("themeButton");
+
+  if (themeButton) {
+    themeButton.addEventListener("click", function () {
+      const darkMode = document.body.classList.toggle("dark-mode");
+
+      themeButton.textContent = darkMode
+        ? "☀️ Tema Terang"
+        : "🌙 Tema Gelap";
+
+      themeButton.setAttribute("aria-pressed", String(darkMode));
+    });
+  }
+
+  // 3. Tombol tampil/sembunyikan ringkasan profil.
+  document.querySelectorAll(".card").forEach(function (card) {
+    const description = card.querySelector("p");
+    const link = card.querySelector(".link");
+
+    if (!description || !link) return;
+
+    const actions = document.createElement("div");
+    actions.className = "card-actions";
+
+    link.parentNode.insertBefore(actions, link);
+    actions.appendChild(link);
+
+    const detailButton = document.createElement("button");
+    detailButton.type = "button";
+    detailButton.className = "detail-button";
+    detailButton.textContent = "Sembunyikan Ringkasan";
+    detailButton.setAttribute("aria-expanded", "true");
+
+    actions.appendChild(detailButton);
+
+    detailButton.addEventListener("click", function () {
+      description.hidden = !description.hidden;
+
+      detailButton.textContent = description.hidden
+        ? "Lihat Ringkasan"
+        : "Sembunyikan Ringkasan";
+
+      detailButton.setAttribute(
+        "aria-expanded",
+        String(!description.hidden)
+      );
+    });
+  });
+
+  // 4. Tombol cetak atau simpan CV sebagai PDF.
+  const footer = document.querySelector(".footer .container");
+
+  if (footer) {
+    const printButton = document.createElement("button");
+    printButton.type = "button";
+    printButton.className = "print-button";
+    printButton.textContent = "Cetak / Simpan sebagai PDF";
+
+    printButton.addEventListener("click", function () {
+      window.print();
+    });
+
+    footer.appendChild(document.createTextNode(" "));
+    footer.appendChild(printButton);
+  }
+
+});
+</script>
+
+</body>
+</html>
